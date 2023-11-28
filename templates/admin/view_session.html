@@ -1,0 +1,33 @@
+{% extends 'admin/index.html' %}
+{% block content %}
+    {% include '../components/msg.html' %}
+<form action=" {% url 'view_session' %}">
+          {% csrf_token %}
+<table class="table table-striped ">
+  <div class="form-group">
+    <button class="btn btn-primary"><a href="{% url 'add_session' %}">Vaqt qo'shish</a></button>
+  </div>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Vaqt boshlanishi</th>
+      <th scope="col">Vaqt tugashi</th>
+      <th scope="col">Harakatlar</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in session %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.sesstion_start }}</td>
+      <td>{{ i.sesstion_end }}</td>
+      <td>
+        <a href="{% url 'edit_session' i.id %}" class="btn btn-outline-success"><i class="fa fa-edit"></i></a>
+        <a id="delete" href="{% url 'delete_session' i.id %}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</form>
+{% endblock %}

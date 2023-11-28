@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include '../components/msg.html' %}
+<div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<form action=" {% url 'courses' %}">
+          {% csrf_token %}
+<table class="table table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Kurs nomi</th>
+      <th scope="col">Ochilgan vaqt</th>
+      <th scope="col">Yangilangan vaqt</th>
+      <th scope="col">Harakatlar</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in course %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.name }}</td>
+      <td>
+        {% load tz %}
+        {{ i.created_ad | date:'Y-m-d H:i' }}
+      </td>
+      <td>
+        {% load tz %}
+        {{ i.updated_ad | date:'Y-m-d H:i' }}
+      </td>
+      <td>
+        <a href="" class="btn btn-outline-success"><i class="fa fa-edit"></i></a>
+        <a id="delete" href="" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</form>
+{% endblock %}
